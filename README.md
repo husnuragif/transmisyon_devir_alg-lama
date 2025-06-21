@@ -3,7 +3,7 @@
 Bu uygulama GitHub Pages üzerinde yayınlanmıştır.
 
 ## Canlı Demo
-[Canlı Demo Linki](https://[kullanıcı-adınız].github.io/ragif/)
+[Canlı Demo Linki](https://husnuragif.github.io/transmisyon_devir_alg-lama/)
 
 ## Özellikler
 - Dişli oranı hesaplama
