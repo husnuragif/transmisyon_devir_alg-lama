@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCADA Dişli Oranı ve Transmisyon Devri Hesaplayıcı</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="scada-container">
+      <div class="scada-header">
+        <h2>Dişli Oranı ve Transmisyon Devri Hesaplayıcı</h2>
+        <div class="scada-datetime" id="datetime"></div>
+      </div>
+      
+      <div class="scada-formula">
+        <div class="formula-text">(D/C) × (A/B) = Transmisyon Devri</div>
+      </div>
+
+      <div class="scada-row">
+        <div class="scada-label">A - Tekerlek Dişlisi Diş Sayısı</div>
+        <input type="number" id="wheelGearTeeth" class="scada-input" value="20" min="1">
+        <div class="scada-label">B - Norton Dişlisi Diş Sayısı</div>
+        <input type="number" id="nortonGearTeeth" class="scada-input" value="17" min="1">
+      </div>
+
+      <div class="scada-row">
+        <div class="scada-label">C - Lastik/Referans Dişli Çapı</div>
+        <input type="number" id="tireDiameter" class="scada-input" value="20" min="1">
+        <div class="scada-label">D - Kasalı Kasnak Çapı</div>
+        <input type="number" id="drivenPulleyDiameter" class="scada-input" value="16" min="1">
+      </div>
+
+      <div class="scada-row">
+        <div class="scada-label">Plaka Numarası</div>
+        <select id="plateNumber" class="scada-select">
+          <option value="">Seçiniz</option>
+          <option value="20">20</option>
+          <option value="26">26</option>
+          <option value="36">36</option>
+          <option value="52">52</option>
+          <option value="72">72</option>
+        </select>
+        <div class="scada-label">Tohum Mesafesi (cm)</div>
+        <input type="number" id="seedSpacing" class="scada-input" value="0" min="0" step="0.1">
+      </div>
+
+      <div class="scada-row">
+        <div class="scada-label">Dişli Oranı Seçimi</div>
+        <select id="gearRatioSelect" class="scada-select">
+          <option value="">Otomatik Hesapla</option>
+          <option value="23-17">23-17</option>
+          <option value="23-18">23-18</option>
+          <option value="23-19">23-19</option>
+          <option value="23-20">23-20</option>
+          <option value="23-21">23-21</option>
+          <option value="23-22">23-22</option>
+          <option value="23-23">23-23</option>
+          <option value="16-17">16-17</option>
+          <option value="16-18">16-18</option>
+          <option value="16-19">16-19</option>
+          <option value="16-20">16-20</option>
+          <option value="16-21">16-21</option>
+          <option value="16-22">16-22</option>
+          <option value="16-23">16-23</option>
+        </select>
+      </div>
+
+      <div class="scada-results">
+        <div class="scada-row">
+          <div class="scada-label">Tekerlek Oranı (A/B)</div>
+          <input type="text" id="wheelRatio" class="scada-input result" value="1.00" readonly>
+          <div class="scada-label">Dişli Oranı (D/C)</div>
+          <input type="text" id="gearRatio" class="scada-input result" value="1.00" readonly>
+        </div>
+        <div class="scada-row">
+          <div class="scada-label">Transmisyon Devri</div>
+          <input type="text" id="transmissionRatio" class="scada-input result" value="1.00" readonly>
+        </div>
+      </div>
+
+      <div class="scada-row">
+        <button id="recordBtn" class="scada-btn record">BAŞLAT</button>
+        <button id="resetBtn" class="scada-btn reset">DURDUR</button>
+      </div>
+
+      <div id="recordList" class="scada-records">
+        <div class="records-header">Kayıtlar</div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html> 

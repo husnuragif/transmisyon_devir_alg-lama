@@ -1,0 +1,107 @@
+body {
+  background: #f4f4f4;
+  font-family: 'Consolas', 'Courier New', monospace;
+  margin: 0;
+  padding: 0;
+}
+.scada-container {
+  background: #e0e0e0;
+  border: 2px solid #b0b0b0;
+  border-radius: 8px;
+  max-width: 900px;
+  margin: 32px auto;
+  padding: 24px 16px;
+  box-shadow: 0 2px 8px #bbb;
+}
+.scada-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 16px;
+  gap: 12px;
+}
+.scada-label {
+  font-weight: bold;
+  background: #d0d0d0;
+  border: 1px solid #b0b0b0;
+  padding: 4px 10px;
+  border-radius: 4px;
+  min-width: 90px;
+  text-align: center;
+  font-size: 1rem;
+}
+.scada-input {
+  width: 80px;
+  padding: 4px 8px;
+  font-size: 1.1rem;
+  border: 2px inset #b0b0b0;
+  background: #fff;
+  color: #222;
+  border-radius: 3px;
+  margin-right: 8px;
+  text-align: right;
+}
+.scada-btn {
+  font-weight: bold;
+  font-size: 1.1rem;
+  padding: 6px 18px;
+  border-radius: 4px;
+  border: 2px outset #b0b0b0;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.scada-btn.record {
+  background: #d0ffd0;
+  color: #008000;
+  border-color: #008000;
+}
+.scada-btn.record:hover {
+  background: #b0ffb0;
+}
+.scada-btn.reset {
+  background: #ffd0d0;
+  color: #b00000;
+  border-color: #b00000;
+}
+.scada-btn.reset:hover {
+  background: #ffb0b0;
+}
+.scada-time {
+  font-family: 'Consolas', 'Courier New', monospace;
+  background: #222;
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 4px;
+  min-width: 180px;
+  text-align: center;
+  font-size: 1rem;
+  margin-left: 8px;
+}
+.scada-records {
+  margin-top: 18px;
+  background: #f8f8f8;
+  border: 1px solid #b0b0b0;
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 0.98rem;
+  max-height: 180px;
+  overflow-y: auto;
+}
+@media (max-width: 700px) {
+  .scada-container {
+    max-width: 98vw;
+    padding: 8px 2vw;
+  }
+  .scada-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+  }
+  .scada-label, .scada-input, .scada-btn, .scada-time {
+    min-width: unset;
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 4px;
+  }
+} 

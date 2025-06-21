@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCADA Şanzıman Devir Hesaplayıcı</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="scada-container">
+      <div class="scada-row">
+        <div class="scada-label">Tahrik Dişlisi</div>
+        <input type="number" id="wheelGear" class="scada-input" value="1" min="0">
+        <div class="scada-label">Norton Dişlisi</div>
+        <input type="number" id="nortonGear" class="scada-input" value="1" min="0">
+        <div class="scada-label">Dişli Oranı</div>
+        <input type="number" id="wheelRatio" class="scada-input" value="1" min="0">
+      </div>
+      <div class="scada-row">
+        <div class="scada-label">Plaka</div>
+        <input type="text" id="plate" class="scada-input" value="">
+        <div class="scada-label">Tohum Aralığı</div>
+        <input type="number" id="seedSpacing" class="scada-input" value="0" min="0">
+      </div>
+      <div class="scada-row">
+        <button id="recordBtn" class="scada-btn record">KAYDET</button>
+        <button id="resetBtn" class="scada-btn reset">SIFIRLA</button>
+        <div class="scada-label">Transmisyon Deviri</div>
+        <input type="text" id="transRev" class="scada-input" value="1.00" readonly>
+      </div>
+      <div id="recordList" class="scada-records"></div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html> 

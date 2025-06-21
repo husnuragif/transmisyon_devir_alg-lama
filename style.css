@@ -1,0 +1,204 @@
+body {
+  background: #f4f4f4;
+  font-family: 'Consolas', 'Courier New', monospace;
+  margin: 0;
+  padding: 0;
+}
+
+.scada-container {
+  background: #e0e0e0;
+  border: 2px solid #b0b0b0;
+  border-radius: 8px;
+  max-width: 1000px;
+  margin: 32px auto;
+  padding: 24px 16px;
+  box-shadow: 0 2px 8px #bbb;
+}
+
+.scada-header {
+  text-align: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #b0b0b0;
+}
+
+.scada-header h2 {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-size: 1.4rem;
+}
+
+.scada-datetime {
+  background: #d0d0d0;
+  border: 1px solid #b0b0b0;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: bold;
+  color: #555;
+  display: inline-block;
+}
+
+.scada-formula {
+  background: #f8f8f8;
+  border: 2px solid #b0b0b0;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.formula-text {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  font-family: 'Courier New', monospace;
+}
+
+.scada-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 16px;
+  gap: 12px;
+}
+
+.scada-label {
+  font-weight: bold;
+  background: #d0d0d0;
+  border: 1px solid #b0b0b0;
+  padding: 6px 12px;
+  border-radius: 4px;
+  min-width: 120px;
+  text-align: center;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.scada-input {
+  width: 90px;
+  padding: 6px 10px;
+  font-size: 1.1rem;
+  border: 2px inset #b0b0b0;
+  background: #fff;
+  color: #222;
+  border-radius: 3px;
+  margin-right: 8px;
+  text-align: right;
+  font-family: 'Courier New', monospace;
+}
+
+.scada-input.result {
+  background: #f0f8ff;
+  font-weight: bold;
+  color: #0066cc;
+}
+
+.scada-select {
+  width: 140px;
+  padding: 6px 10px;
+  font-size: 1rem;
+  border: 2px inset #b0b0b0;
+  background: #fff;
+  color: #222;
+  border-radius: 3px;
+  margin-right: 8px;
+  font-family: 'Courier New', monospace;
+}
+
+.scada-results {
+  background: #f8f8f8;
+  border: 2px solid #b0b0b0;
+  border-radius: 6px;
+  padding: 15px;
+  margin: 20px 0;
+}
+
+.scada-btn {
+  font-weight: bold;
+  font-size: 1.1rem;
+  padding: 8px 20px;
+  border-radius: 4px;
+  border: 2px outset #b0b0b0;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-family: 'Courier New', monospace;
+}
+
+.scada-btn.record {
+  background: #d0ffd0;
+  color: #008000;
+  border-color: #008000;
+}
+
+.scada-btn.record:hover {
+  background: #b0ffb0;
+}
+
+.scada-btn.reset {
+  background: #ffd0d0;
+  color: #b00000;
+  border-color: #b00000;
+}
+
+.scada-btn.reset:hover {
+  background: #ffb0b0;
+}
+
+.scada-records {
+  margin-top: 20px;
+  background: #f8f8f8;
+  border: 2px solid #b0b0b0;
+  border-radius: 6px;
+  padding: 15px;
+  font-size: 0.9rem;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.records-header {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #b0b0b0;
+  font-size: 1rem;
+}
+
+.scada-records div {
+  padding: 4px 0;
+  border-bottom: 1px solid #e0e0e0;
+  font-family: 'Courier New', monospace;
+}
+
+.scada-records div:last-child {
+  border-bottom: none;
+}
+
+@media (max-width: 800px) {
+  .scada-container {
+    max-width: 98vw;
+    padding: 12px 2vw;
+  }
+  
+  .scada-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  
+  .scada-label, .scada-input, .scada-select, .scada-btn {
+    min-width: unset;
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 4px;
+  }
+  
+  .scada-header h2 {
+    font-size: 1.2rem;
+  }
+  
+  .formula-text {
+    font-size: 1rem;
+  }
+} 
