@@ -7,6 +7,22 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
+    <script>
+      // Bu script, eski bir sürümün önbelleğe alınmasına neden olan
+      // aktif service worker'ları temizlemek için eklenmiştir.
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+          if (registrations.length > 0) {
+            console.log(registrations.length + ' adet service worker bulundu, kaldırılıyor...');
+            const unregisterPromises = registrations.map(registration => registration.unregister());
+            Promise.all(unregisterPromises).then(() => {
+              console.log('Tüm service workerlar kaldırıldı. Sayfa yeniden yükleniyor...');
+              window.location.reload();
+            });
+          }
+        });
+      }
+    </script>
     <div class="scada-container">
       <div class="scada-header">
         <h2>Dişli Oranı ve Transmisyon Devri Hesaplayıcı</h2>
