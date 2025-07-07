@@ -233,3 +233,24 @@ body {
     font-size: 1rem;
   }
 } 
+
+.disli-sema-img {
+  max-width: 350px;
+  width: 100%;
+  border: 1px solid #aaa;
+  background: #fff;
+  padding: 8px;
+  border-radius: 6px;
+  display: block;
+}
+
+.tablo-img {
+  max-width: 600px;
+  width: 100%;
+  border: 1px solid #aaa;
+  background: #fff;
+  padding: 8px;
+  border-radius: 6px;
+  display: block;
+  margin: 0 auto;
+} 
