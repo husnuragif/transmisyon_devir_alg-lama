@@ -43,20 +43,20 @@
       <div class="scada-row">
         <div class="scada-label">C - Tahrik Dişlileri</div>
         <input type="number" id="tireDiameter" class="scada-input" value="20" min="1">
-        <div class="scada-label">D - Sekonder Dişlileri</div>
+        <div class="scada-label">D - Sekonder Dişlileri</div>
         <input type="number" id="drivenPulleyDiameter" class="scada-input" value="16" min="1">
       </div>
 
       <div class="scada-row">
-        <div class="scada-label">Plaka Numarası</div>
-        <select id="plateNumber" class="scada-select">
-          <option value="">Seçiniz</option>
-          <option value="20">20</option>
-          <option value="26">26</option>
-          <option value="36">36</option>
-          <option value="52">52</option>
-          <option value="72">72</option>
-        </select>
+        <div class="scada-label">D - Tekerlek Çapı</div>
+        <input type="number" id="wheelDiameter" class="scada-input" value="0" min="0" step="0.1">
+        <div class="scada-label">k Değeri</div>
+        <input type="number" id="kValue" class="scada-input" value="0" min="0" step="0.1">
+      </div>
+
+      <div class="scada-row">
+        <div class="scada-label">nplaka</div>
+        <input type="number" id="plateNumber" class="scada-input" value="0" min="0">
         <div class="scada-label">Tohum Mesafesi (cm)</div>
         <input type="number" id="seedSpacing" class="scada-input" value="0" min="0" step="0.1">
       </div>
@@ -92,6 +92,10 @@
         <div class="scada-row">
           <div class="scada-label">Transmisyon Devri</div>
           <input type="text" id="transmissionRatio" class="scada-input result" value="1.00" readonly>
+        </div>
+        <div class="scada-row">
+          <div class="scada-label">Z Değeri</div>
+          <input type="text" id="zValue" class="scada-input result" value="0.00" readonly>
         </div>
       </div>
 

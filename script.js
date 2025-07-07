@@ -8,12 +8,15 @@ const wheelGearTeeth = document.getElementById('wheelGearTeeth');
 const nortonGearTeeth = document.getElementById('nortonGearTeeth');
 const tireDiameter = document.getElementById('tireDiameter');
 const drivenPulleyDiameter = document.getElementById('drivenPulleyDiameter');
+const wheelDiameter = document.getElementById('wheelDiameter');
+const kValue = document.getElementById('kValue');
 const plateNumber = document.getElementById('plateNumber');
 const seedSpacing = document.getElementById('seedSpacing');
 const gearRatioSelect = document.getElementById('gearRatioSelect');
 const wheelRatio = document.getElementById('wheelRatio');
 const gearRatio = document.getElementById('gearRatio');
 const transmissionRatio = document.getElementById('transmissionRatio');
+const zValue = document.getElementById('zValue');
 const recordBtn = document.getElementById('recordBtn');
 const resetBtn = document.getElementById('resetBtn');
 const recordList = document.getElementById('recordList');
@@ -66,15 +69,32 @@ function calculateTransmissionRatio() {
   return wheelRatioValue * gearRatioValue;
 }
 
+// Calculate Z value: (π × D) / (i × k)
+function calculateZValue() {
+  const pi = Math.PI;
+  const d = parseFloat(wheelDiameter.value) || 0;
+  const nplaka = parseFloat(plateNumber.value) || 0;
+  const nteker = 29.39; // Sabit değer
+  const k = parseFloat(kValue.value) || 0;
+  
+  if (k === 0) return 0;
+  
+  const i = nplaka / nteker;
+  const z = (pi * d) / (i * k);
+  return z;
+}
+
 // Update all calculations and display
 function updateCalculations() {
   const wheelRatioValue = calculateWheelRatio();
   const gearRatioValue = calculateGearRatio();
   const transmissionRatioValue = calculateTransmissionRatio();
+  const zValueValue = calculateZValue();
 
   wheelRatio.value = fmt(wheelRatioValue);
   gearRatio.value = fmt(gearRatioValue);
   transmissionRatio.value = fmt(transmissionRatioValue);
+  zValue.value = fmt(zValueValue);
 }
 
 // Handle gear ratio selection
@@ -97,7 +117,9 @@ function resetForm() {
   nortonGearTeeth.value = 17;
   tireDiameter.value = 20;
   drivenPulleyDiameter.value = 16;
-  plateNumber.value = '';
+  wheelDiameter.value = 0;
+  kValue.value = 0;
+  plateNumber.value = 0;
   seedSpacing.value = 0;
   gearRatioSelect.value = '';
   updateCalculations();
@@ -111,20 +133,24 @@ function recordEntry() {
     nortonGearTeeth: nortonGearTeeth.value || '0',
     tireDiameter: tireDiameter.value || '0',
     drivenPulleyDiameter: drivenPulleyDiameter.value || '0',
-    plateNumber: plateNumber.value || 'N/A',
+    wheelDiameter: wheelDiameter.value || '0',
+    kValue: kValue.value || '0',
+    plateNumber: plateNumber.value || '0',
     seedSpacing: seedSpacing.value || '0',
     wheelRatio: wheelRatio.value || '0.00',
     gearRatio: gearRatio.value || '0.00',
-    transmissionRatio: transmissionRatio.value || '0.00'
+    transmissionRatio: transmissionRatio.value || '0.00',
+    zValue: zValue.value || '0.00'
   };
 
   const div = document.createElement('div');
   div.innerHTML = `
     <strong>${entry.datetime}</strong><br>
     A: ${entry.wheelGearTeeth}, B: ${entry.nortonGearTeeth}, C: ${entry.tireDiameter}, D: ${entry.drivenPulleyDiameter}<br>
-    Plaka: ${entry.plateNumber}, Tohum: ${entry.seedSpacing}cm<br>
+    Tekerlek Çapı: ${entry.wheelDiameter}, k: ${entry.kValue}, nplaka: ${entry.plateNumber}, Tohum: ${entry.seedSpacing}cm<br>
     Tekerlek Oranı: ${entry.wheelRatio}, Dişli Oranı: ${entry.gearRatio}<br>
-    <strong>Transmisyon Devri: ${entry.transmissionRatio}</strong>
+    <strong>Transmisyon Devri: ${entry.transmissionRatio}</strong><br>
+    <strong>Z Değeri: ${entry.zValue}</strong>
   `;
   
   recordList.appendChild(div);
@@ -150,6 +176,9 @@ function validateAllInputs() {
   validateInput(nortonGearTeeth);
   validateInput(tireDiameter);
   validateInput(drivenPulleyDiameter);
+  validateInput(wheelDiameter);
+  validateInput(kValue);
+  validateInput(plateNumber);
   validateInput(seedSpacing);
 }
 
@@ -168,6 +197,18 @@ tireDiameter.addEventListener('input', () => {
 });
 drivenPulleyDiameter.addEventListener('input', () => {
   validateInput(drivenPulleyDiameter);
+  updateCalculations();
+});
+wheelDiameter.addEventListener('input', () => {
+  validateInput(wheelDiameter);
+  updateCalculations();
+});
+kValue.addEventListener('input', () => {
+  validateInput(kValue);
+  updateCalculations();
+});
+plateNumber.addEventListener('input', () => {
+  validateInput(plateNumber);
   updateCalculations();
 });
 seedSpacing.addEventListener('input', () => {
