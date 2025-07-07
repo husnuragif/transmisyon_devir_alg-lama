@@ -199,15 +199,17 @@ body {
 }
 
 .tablo-img, .disli-sema-img {
-  max-width: 340px;
+  max-width: 480px;
   min-width: 220px;
   width: 100%;
+  max-height: 420px;
   height: auto;
-  border: 1.5px solid #aaa;
+  border: 1px solid #aaa;
   background: #fff;
-  padding: 8px;
+  padding: 4px;
   border-radius: 6px;
   box-sizing: border-box;
+  object-fit: contain;
 }
 
 .main-flex-center {
