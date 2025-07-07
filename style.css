@@ -175,6 +175,50 @@ body {
   border-bottom: none;
 }
 
+.main-flex-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  margin: 40px 0;
+}
+
+.main-flex-img {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.tablo-img, .disli-sema-img {
+  max-width: 260px;
+  width: 100%;
+  height: auto;
+  border: 1.5px solid #aaa;
+  background: #fff;
+  padding: 8px;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.main-flex-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+@media (max-width: 900px) {
+  .main-flex-row {
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+  }
+  .tablo-img, .disli-sema-img {
+    max-width: 90vw;
+  }
+}
+
 @media (max-width: 800px) {
   .scada-container {
     max-width: 98vw;
