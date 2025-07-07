@@ -1,18 +1,17 @@
-html, body {
-  height: 100%;
-  min-height: 100%;
+body {
+  background: #f4f4f4;
+  font-family: 'Consolas', 'Courier New', monospace;
   margin: 0;
   padding: 0;
-  overflow: hidden;
 }
 
 .scada-container {
   background: #e0e0e0;
   border: 2px solid #b0b0b0;
   border-radius: 8px;
-  max-width: 800px;
+  max-width: 1000px;
   margin: 32px auto;
-  padding: 16px 10px;
+  padding: 24px 16px;
   box-shadow: 0 2px 8px #bbb;
 }
 
@@ -174,65 +173,6 @@ html, body {
 
 .scada-records div:last-child {
   border-bottom: none;
-}
-
-.main-flex-row {
-  height: 100vh;
-  min-height: 100vh;
-  align-items: center;
-  justify-content: center;
-  gap: 32px;
-}
-.main-flex-img {
-  flex: 0 0 28vw;
-  max-width: 28vw;
-  min-width: 200px;
-}
-.main-flex-center {
-  flex: 1 1 36vw;
-  min-width: 340px;
-  max-width: 40vw;
-}
-.tablo-img {
-  max-width: 100%;
-  height: auto;
-  object-fit: contain;
-}
-.disli-sema-img {
-  max-width: 100%;
-  height: auto;
-  object-fit: contain;
-}
-@media (max-width: 1200px) {
-  .main-flex-row {
-    gap: 12px;
-  }
-  .main-flex-img, .main-flex-center {
-    min-width: 180px;
-    max-width: 98vw;
-  }
-}
-@media (max-width: 1100px) {
-  .main-flex-row {
-    gap: 16px;
-  }
-  .tablo-img, .disli-sema-img {
-    max-width: 220px;
-  }
-}
-@media (max-width: 900px) {
-  .main-flex-row {
-    flex-direction: column;
-    align-items: center;
-    gap: 24px;
-  }
-  .main-flex-img, .main-flex-center {
-    max-width: 98vw;
-    width: 100%;
-  }
-  .tablo-img, .disli-sema-img {
-    max-width: 98vw;
-  }
 }
 
 @media (max-width: 800px) {
