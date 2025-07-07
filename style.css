@@ -9,16 +9,16 @@ body {
   background: #e0e0e0;
   border: 2px solid #b0b0b0;
   border-radius: 8px;
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 32px auto;
-  padding: 12px 32px;
+  padding: 24px 16px;
   box-shadow: 0 2px 8px #bbb;
 }
 
 .scada-header {
   text-align: center;
-  margin-bottom: 10px;
-  padding-bottom: 8px;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
   border-bottom: 2px solid #b0b0b0;
 }
 
@@ -42,8 +42,8 @@ body {
   background: #f8f8f8;
   border: 2px solid #b0b0b0;
   border-radius: 6px;
-  padding: 8px;
-  margin-bottom: 10px;
+  padding: 12px;
+  margin-bottom: 20px;
   text-align: center;
 }
 
@@ -58,26 +58,26 @@ body {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  margin-bottom: 8px;
-  gap: 18px;
+  margin-bottom: 16px;
+  gap: 12px;
 }
 
 .scada-label {
   font-weight: bold;
   background: #d0d0d0;
   border: 1px solid #b0b0b0;
-  padding: 4px 14px;
+  padding: 6px 12px;
   border-radius: 4px;
-  min-width: 140px;
+  min-width: 120px;
   text-align: center;
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: #333;
 }
 
 .scada-input {
-  width: 120px;
-  padding: 4px 10px;
-  font-size: 1.05rem;
+  width: 90px;
+  padding: 6px 10px;
+  font-size: 1.1rem;
   border: 2px inset #b0b0b0;
   background: #fff;
   color: #222;
@@ -94,9 +94,9 @@ body {
 }
 
 .scada-select {
-  width: 120px;
-  padding: 4px 10px;
-  font-size: 1.05rem;
+  width: 140px;
+  padding: 6px 10px;
+  font-size: 1rem;
   border: 2px inset #b0b0b0;
   background: #fff;
   color: #222;
@@ -109,8 +109,8 @@ body {
   background: #f8f8f8;
   border: 2px solid #b0b0b0;
   border-radius: 6px;
-  padding: 10px;
-  margin: 12px 0;
+  padding: 15px;
+  margin: 20px 0;
 }
 
 .scada-btn {
@@ -146,11 +146,11 @@ body {
 }
 
 .scada-records {
-  margin-top: 10px;
+  margin-top: 20px;
   background: #f8f8f8;
   border: 2px solid #b0b0b0;
   border-radius: 6px;
-  padding: 8px;
+  padding: 15px;
   font-size: 0.9rem;
   max-height: 200px;
   overflow-y: auto;
