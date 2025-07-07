@@ -1,8 +1,9 @@
-body {
-  background: #f4f4f4;
-  font-family: 'Consolas', 'Courier New', monospace;
+html, body {
+  height: 100%;
+  min-height: 100%;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 
 .scada-container {
@@ -176,49 +177,39 @@ body {
 }
 
 .main-flex-row {
-  display: flex;
+  height: 100vh;
+  min-height: 100vh;
+  align-items: center;
   justify-content: center;
-  align-items: flex-start;
-  gap: 48px;
-  margin: 32px 0;
-  flex-wrap: wrap;
+  gap: 32px;
 }
 .main-flex-img {
-  flex: 0 0 340px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex: 0 0 28vw;
+  max-width: 28vw;
+  min-width: 200px;
 }
 .main-flex-center {
-  flex: 1 1 420px;
-  min-width: 320px;
-  max-width: 600px;
-  display: flex;
-  justify-content: center;
+  flex: 1 1 36vw;
+  min-width: 340px;
+  max-width: 40vw;
 }
 .tablo-img {
-  max-width: 420px;
-  min-width: 220px;
-  width: 100%;
-  border: 1px solid #aaa;
-  background: #fff;
-  padding: 8px;
-  border-radius: 6px;
-  display: block;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 .disli-sema-img {
-  max-width: 420px;
-  min-width: 220px;
-  width: 100%;
-  border: 1px solid #aaa;
-  background: #fff;
-  padding: 8px;
-  border-radius: 6px;
-  display: block;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
 }
-@media (max-width: 1300px) {
-  .tablo-img, .disli-sema-img {
-    max-width: 320px;
+@media (max-width: 1200px) {
+  .main-flex-row {
+    gap: 12px;
+  }
+  .main-flex-img, .main-flex-center {
+    min-width: 180px;
+    max-width: 98vw;
   }
 }
 @media (max-width: 1100px) {
