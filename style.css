@@ -179,30 +179,61 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 32px;
-  margin-top: 24px;
+  gap: 48px;
+  margin: 32px 0;
   flex-wrap: wrap;
 }
-.main-flex-left {
-  flex: 1 1 400px;
-  min-width: 320px;
-  max-width: 600px;
-}
-.main-flex-right {
-  flex: 0 0 350px;
-  min-width: 220px;
-  max-width: 400px;
+.main-flex-img {
+  flex: 0 0 340px;
   display: flex;
   justify-content: center;
+  align-items: flex-start;
+}
+.main-flex-center {
+  flex: 1 1 420px;
+  min-width: 320px;
+  max-width: 600px;
+  display: flex;
+  justify-content: center;
+}
+.tablo-img {
+  max-width: 320px;
+  width: 100%;
+  border: 1px solid #aaa;
+  background: #fff;
+  padding: 8px;
+  border-radius: 6px;
+  display: block;
+}
+.disli-sema-img {
+  max-width: 320px;
+  width: 100%;
+  border: 1px solid #aaa;
+  background: #fff;
+  padding: 8px;
+  border-radius: 6px;
+  display: block;
+}
+@media (max-width: 1100px) {
+  .main-flex-row {
+    gap: 16px;
+  }
+  .tablo-img, .disli-sema-img {
+    max-width: 220px;
+  }
 }
 @media (max-width: 900px) {
   .main-flex-row {
     flex-direction: column;
     align-items: center;
+    gap: 24px;
   }
-  .main-flex-right, .main-flex-left {
+  .main-flex-img, .main-flex-center {
     max-width: 98vw;
     width: 100%;
+  }
+  .tablo-img, .disli-sema-img {
+    max-width: 98vw;
   }
 }
 
@@ -231,62 +262,5 @@ body {
   
   .formula-text {
     font-size: 1rem;
-  }
-} 
-
-.disli-sema-img {
-  max-width: 350px;
-  width: 100%;
-  border: 1px solid #aaa;
-  background: #fff;
-  padding: 8px;
-  border-radius: 6px;
-  display: block;
-}
-
-.tablo-img {
-  max-width: 600px;
-  width: 100%;
-  border: 1px solid #aaa;
-  background: #fff;
-  padding: 8px;
-  border-radius: 6px;
-  display: block;
-  margin: 0 auto;
-} 
-
-.main-flex-row-3 {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 48px;
-  margin-top: 32px;
-  flex-wrap: wrap;
-}
-.main-flex-col {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 220px;
-  max-width: 400px;
-}
-.main-flex-col:nth-child(2) {
-  min-width: 340px;
-  max-width: 600px;
-}
-@media (max-width: 1200px) {
-  .main-flex-row-3 {
-    gap: 24px;
-  }
-}
-@media (max-width: 900px) {
-  .main-flex-row-3 {
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-  }
-  .main-flex-col {
-    max-width: 98vw;
-    width: 100%;
   }
 } 
