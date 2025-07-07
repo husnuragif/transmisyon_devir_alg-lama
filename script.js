@@ -121,7 +121,7 @@ function resetForm() {
   wheelDiameter.value = 0;
   kValue.value = 0;
   plateNumber.value = 0;
-  nTeker.value = 29.39;
+  nTeker.value = 0;
   seedSpacing.value = 0;
   gearRatioSelect.value = '';
   updateCalculations();
