@@ -30,13 +30,13 @@
       </div>
       
       <div class="scada-formula">
-        <div class="formula-text">(D/C) × (A/B) = Transmisyon Devri</div>
+        <div class="formula-text">Z = (π*D)/(i*k) = Transmisyon Devri</div>
       </div>
 
       <div class="scada-row">
-        <div class="scada-label">A - Tekerlek Dişlisi Diş Sayısı</div>
+        <div class="scada-label">A - z1</div>
         <input type="number" id="wheelGearTeeth" class="scada-input" value="20" min="1">
-        <div class="scada-label">B - Norton Dişlisi Diş Sayısı</div>
+        <div class="scada-label">B - c2</div>
         <input type="number" id="nortonGearTeeth" class="scada-input" value="17" min="1">
       </div>
 
@@ -90,7 +90,7 @@
           <input type="text" id="gearRatio" class="scada-input result" value="1.00" readonly>
         </div>
         <div class="scada-row">
-          <div class="scada-label">Transmisyon Devri</div>
+          <div class="scada-label">Transmisyon Oranı</div>
           <input type="text" id="transmissionRatio" class="scada-input result" value="1.00" readonly>
         </div>
         <div class="scada-row">
