@@ -21,6 +21,7 @@ const recordBtn = document.getElementById('recordBtn');
 const resetBtn = document.getElementById('resetBtn');
 const recordList = document.getElementById('recordList');
 const datetime = document.getElementById('datetime');
+const nTeker = document.getElementById('nTeker');
 
 // Predefined gear ratios
 const gearRatios = {
@@ -74,10 +75,10 @@ function calculateZValue() {
   const pi = Math.PI;
   const d = parseFloat(wheelDiameter.value) || 0;
   const nplaka = parseFloat(plateNumber.value) || 0;
-  const nteker = 29.39; // Sabit değer
+  const nteker = parseFloat(nTeker.value) || 1; // inputtan al
   const k = parseFloat(kValue.value) || 0;
   
-  if (k === 0) return 0;
+  if (k === 0 || nteker === 0) return 0;
   
   const i = nplaka / nteker;
   const z = (pi * d) / (i * k);
@@ -120,6 +121,7 @@ function resetForm() {
   wheelDiameter.value = 0;
   kValue.value = 0;
   plateNumber.value = 0;
+  nTeker.value = 29.39;
   seedSpacing.value = 0;
   gearRatioSelect.value = '';
   updateCalculations();
@@ -180,6 +182,7 @@ function validateAllInputs() {
   validateInput(kValue);
   validateInput(plateNumber);
   validateInput(seedSpacing);
+  validateInput(nTeker);
 }
 
 // Event listeners
@@ -213,6 +216,10 @@ plateNumber.addEventListener('input', () => {
 });
 seedSpacing.addEventListener('input', () => {
   validateInput(seedSpacing);
+});
+nTeker.addEventListener('input', () => {
+  validateInput(nTeker);
+  updateCalculations();
 });
 gearRatioSelect.addEventListener('change', handleGearRatioSelection);
 recordBtn.addEventListener('click', recordEntry);
