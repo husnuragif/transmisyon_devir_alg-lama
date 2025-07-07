@@ -8,20 +8,20 @@
   flex-wrap: wrap;
 }
 .main-flex-img {
-  flex: 0 0 260px;
+  flex: 0 0 300px;
   display: flex;
   justify-content: center;
   align-items: flex-start;
 }
 .main-flex-center {
-  flex: 1 1 500px;
+  flex: 1 1 600px;
   min-width: 340px;
-  max-width: 700px;
+  max-width: 800px;
   display: flex;
   justify-content: center;
 }
 .tablo-img, .disli-sema-img {
-  max-width: 260px;
+  max-width: 300px;
   width: 100%;
   border: 1px solid #aaa;
   background: #fff;
