@@ -11,7 +11,6 @@ const drivenPulleyDiameter = document.getElementById('drivenPulleyDiameter');
 const wheelDiameter = document.getElementById('wheelDiameter');
 const kValue = document.getElementById('kValue');
 const plateNumber = document.getElementById('plateNumber');
-const seedSpacing = document.getElementById('seedSpacing');
 const gearRatioSelect = document.getElementById('gearRatioSelect');
 const wheelRatio = document.getElementById('wheelRatio');
 const gearRatio = document.getElementById('gearRatio');
@@ -21,7 +20,8 @@ const recordBtn = document.getElementById('recordBtn');
 const resetBtn = document.getElementById('resetBtn');
 const recordList = document.getElementById('recordList');
 const datetime = document.getElementById('datetime');
-const nTeker = document.getElementById('nTeker');
+const speedValue = document.getElementById('speedValue');
+const calculatedN2 = document.getElementById('calculatedN2');
 
 // Predefined gear ratios
 const gearRatios = {
@@ -63,26 +63,49 @@ function calculateGearRatio() {
   return c > 0 ? d / c : 0;
 }
 
-// Calculate transmission ratio (D/C) × (A/B)
+// Calculate i value: n1(plaka) / n2(teker)
 function calculateTransmissionRatio() {
-  const wheelRatioValue = calculateWheelRatio();
-  const gearRatioValue = calculateGearRatio();
-  return wheelRatioValue * gearRatioValue;
+  const nplaka = parseFloat(plateNumber.value) || 0;
+  const nteker = calculateN2FromSpeed(); // hesaplanan n2 değerini kullan
+  
+  if (nteker === 0) return 0;
+  
+  const i = nplaka / nteker;
+  return i;
 }
 
 // Calculate Z value: (π × D) / (i × k)
 function calculateZValue() {
   const pi = Math.PI;
-  const d = parseFloat(wheelDiameter.value) || 0;
-  const nplaka = parseFloat(plateNumber.value) || 0;
-  const nteker = parseFloat(nTeker.value) || 1; // inputtan al
-  const k = parseFloat(kValue.value) || 0;
+  const d = parseFloat(wheelDiameter.value) || 0;        // D - Tekerlek Çapı (metre)
+  const nplaka = parseFloat(plateNumber.value) || 0;     // n1(plaka)
+  const nteker = calculateN2FromSpeed();                 // n2(teker) - hesaplanan (devir/dakika)
+  const k = parseFloat(kValue.value) || 0;               // k Değeri (plaka delik sayısı)
   
   if (k === 0 || nteker === 0) return 0;
   
-  const i = nplaka / nteker;
-  const z = (pi * d) / (i * k);
-  return z;
+  const i = nplaka / nteker;                             // i = n1/n2
+  const z = (pi * d) / (i * k);                         // Z = (π × D) / (i × k)
+  
+  // Debug: Z değeri metre cinsinden çıkıyor, cm'ye çevirelim
+  // Z = (π × D) / (i × k) = (π × m) / (i × k) = metre
+  // Eğer Z cm cinsinden isteniyorsa: z * 100
+  return z * 100; // cm cinsinden sonuç
+}
+
+// Calculate n2(teker) from speed: n2 = (V × 60) / (π × D)
+function calculateN2FromSpeed() {
+  const v = parseFloat(speedValue.value) || 0; // hız m/s
+  const d = parseFloat(wheelDiameter.value) || 0; // tekerlek çapı (metre)
+  const pi = Math.PI;
+  
+  if (d === 0) return 0;
+  
+  // Formül: n2 = (V × 60) / (π × D)
+  // V m/s cinsinden, D metre cinsinden
+  // n2 = (V × 60) / (π × D) = (m/s × 60) / (π × m) = devir/dakika
+  const n2 = (v * 60) / (pi * d);
+  return n2;
 }
 
 // Update all calculations and display
@@ -91,11 +114,13 @@ function updateCalculations() {
   const gearRatioValue = calculateGearRatio();
   const transmissionRatioValue = calculateTransmissionRatio();
   const zValueValue = calculateZValue();
+  const calculatedN2Value = calculateN2FromSpeed();
 
   wheelRatio.value = fmt(wheelRatioValue);
   gearRatio.value = fmt(gearRatioValue);
   transmissionRatio.value = fmt(transmissionRatioValue);
   zValue.value = fmt(zValueValue);
+  calculatedN2.value = fmt(calculatedN2Value);
 }
 
 // Handle gear ratio selection
@@ -121,8 +146,7 @@ function resetForm() {
   wheelDiameter.value = 0;
   kValue.value = 0;
   plateNumber.value = 0;
-  nTeker.value = 29.39;
-  seedSpacing.value = 0;
+  speedValue.value = 0;
   gearRatioSelect.value = '';
   updateCalculations();
 }
@@ -138,7 +162,8 @@ function recordEntry() {
     wheelDiameter: wheelDiameter.value || '0',
     kValue: kValue.value || '0',
     plateNumber: plateNumber.value || '0',
-    seedSpacing: seedSpacing.value || '0',
+    speedValue: speedValue.value || '0',
+    calculatedN2: calculatedN2.value || '0.00',
     wheelRatio: wheelRatio.value || '0.00',
     gearRatio: gearRatio.value || '0.00',
     transmissionRatio: transmissionRatio.value || '0.00',
@@ -149,9 +174,10 @@ function recordEntry() {
   div.innerHTML = `
     <strong>${entry.datetime}</strong><br>
     A: ${entry.wheelGearTeeth}, B: ${entry.nortonGearTeeth}, C: ${entry.tireDiameter}, D: ${entry.drivenPulleyDiameter}<br>
-    Tekerlek Çapı: ${entry.wheelDiameter}, k: ${entry.kValue}, nplaka: ${entry.plateNumber}, Tohum: ${entry.seedSpacing}cm<br>
+    Tekerlek Çapı: ${entry.wheelDiameter}, k: ${entry.kValue}, nplaka: ${entry.plateNumber}<br>
+    Hız: ${entry.speedValue} m/s, Hesaplanan n2: ${entry.calculatedN2}<br>
     Tekerlek Oranı: ${entry.wheelRatio}, Dişli Oranı: ${entry.gearRatio}<br>
-    <strong>Transmisyon Devri: ${entry.transmissionRatio}</strong><br>
+    <strong>i: ${entry.transmissionRatio}</strong><br>
     <strong>Z Değeri: ${entry.zValue}</strong>
   `;
   
@@ -181,8 +207,7 @@ function validateAllInputs() {
   validateInput(wheelDiameter);
   validateInput(kValue);
   validateInput(plateNumber);
-  validateInput(seedSpacing);
-  validateInput(nTeker);
+  validateInput(speedValue);
 }
 
 // Event listeners
@@ -214,11 +239,8 @@ plateNumber.addEventListener('input', () => {
   validateInput(plateNumber);
   updateCalculations();
 });
-seedSpacing.addEventListener('input', () => {
-  validateInput(seedSpacing);
-});
-nTeker.addEventListener('input', () => {
-  validateInput(nTeker);
+speedValue.addEventListener('input', () => {
+  validateInput(speedValue);
   updateCalculations();
 });
 gearRatioSelect.addEventListener('change', handleGearRatioSelection);
