@@ -118,7 +118,7 @@ function updateCalculations() {
 function resetForm() {
   wheelDiameter.value = 0;
   kValue.value = 0;
-  plateNumber.value = 0;
+  plateNumber.value = "0.00";
   speedValue.value = 0;
   updateCalculations();
 }
@@ -166,7 +166,7 @@ function validateInput(input) {
 function validateAllInputs() {
   validateInput(wheelDiameter);
   validateInput(kValue);
-  validateInput(plateNumber);
+  // plateNumber artık readonly olduğu için validate edilmiyor
   validateInput(speedValue);
 }
 
@@ -205,10 +205,7 @@ kValue.addEventListener('input', () => {
   validateInput(kValue);
   updateCalculations();
 });
-plateNumber.addEventListener('input', () => {
-  validateInput(plateNumber);
-  updateCalculations();
-});
+// plateNumber artık readonly olduğu için input event listener'ı kaldırıldı
 speedValue.addEventListener('input', () => {
   validateInput(speedValue);
   updateCalculations();
