@@ -14,7 +14,7 @@ const resetBtn = document.getElementById('resetBtn');
 const recordList = document.getElementById('recordList');
 const datetime = document.getElementById('datetime');
 const speedValue = document.getElementById('speedValue');
-const calculatedN2 = document.getElementById('calculatedN2');
+const nteker = document.getElementById('nteker');
 
 // --- Formül Zinciri Hesaplama ---
 const chain_n1 = document.getElementById('chain_n1');
@@ -27,6 +27,7 @@ const chain_z7 = document.getElementById('chain_z7');
 const chain_n2 = document.getElementById('chain_n2');
 const chain_n4 = document.getElementById('chain_n4');
 const chain_n7 = document.getElementById('chain_n7');
+const chain_nteker = document.getElementById('chain_nteker');
 
 // Predefined gear ratios
 const gearRatios = {
@@ -103,11 +104,13 @@ function calculateN2FromSpeed() {
 function updateCalculations() {
   const transmissionRatioValue = calculateTransmissionRatio();
   const zValueValue = calculateZValue();
-  const calculatedN2Value = calculateN2FromSpeed();
+  const calculatedNtekerValue = calculateN2FromSpeed();
 
   transmissionRatio.value = fmt(transmissionRatioValue);
   zValue.value = fmt(zValueValue);
-  calculatedN2.value = fmt(calculatedN2Value);
+  nteker.value = fmt(calculatedNtekerValue);
+  // Zincir kısmındaki nteker inputunu da otomatik doldur
+  chain_nteker.value = fmt(calculatedNtekerValue);
 }
 
 // Reset form to default values
@@ -127,7 +130,7 @@ function recordEntry() {
     kValue: kValue.value || '0',
     plateNumber: plateNumber.value || '0',
     speedValue: speedValue.value || '0',
-    calculatedN2: calculatedN2.value || '0.00',
+    calculatedNteker: nteker.value || '0.00',
     transmissionRatio: transmissionRatio.value || '0.00',
     zValue: zValue.value || '0.00'
   };
@@ -136,7 +139,7 @@ function recordEntry() {
   div.innerHTML = `
     <strong>${entry.datetime}</strong><br>
     Tekerlek Çapı: ${entry.wheelDiameter}, k: ${entry.kValue}, nplaka: ${entry.plateNumber}<br>
-    Hız: ${entry.speedValue} m/s, Hesaplanan n2: ${entry.calculatedN2}<br>
+    Hız: ${entry.speedValue} m/s, Hesaplanan n2: ${entry.calculatedNteker}<br>
     <strong>i: ${entry.transmissionRatio}</strong><br>
     <strong>Z Değeri: ${entry.zValue}</strong>
   `;
@@ -168,7 +171,7 @@ function validateAllInputs() {
 
 // Update formula chain calculations
 function updateFormulaChain() {
-  const n1 = parseFloat(chain_n1.value) || 0;
+  const ntekerVal = parseFloat(chain_nteker.value) || 0;
   const z1 = parseFloat(chain_z1.value) || 0;
   const z2 = parseFloat(chain_z2.value) || 0;
   const z3 = parseFloat(chain_z3.value) || 0;
@@ -176,8 +179,8 @@ function updateFormulaChain() {
   const z6 = parseFloat(chain_z6.value) || 0;
   const z7 = parseFloat(chain_z7.value) || 0;
 
-  // n2 = (n1 * z1) / z2
-  let n2 = (z2 !== 0) ? (n1 * z1) / z2 : 0;
+  // n2 = (nteker * z1) / z2
+  let n2 = (z2 !== 0) ? (ntekerVal * z1) / z2 : 0;
   // n4 = (n2 * z3) / z4
   let n4 = (z4 !== 0) ? (n2 * z3) / z4 : 0;
   // n7 = (n4 * z6) / z7
