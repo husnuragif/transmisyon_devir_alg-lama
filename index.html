@@ -40,20 +40,6 @@
       </div>
 
       <div class="scada-row">
-        <div class="scada-label">A - z1</div>
-        <input type="number" id="wheelGearTeeth" class="scada-input" value="20" min="1">
-        <div class="scada-label">B - z2</div>
-        <input type="number" id="nortonGearTeeth" class="scada-input" value="17" min="1">
-      </div>
-
-      <div class="scada-row">
-        <div class="scada-label">C - Tahrik Dişlileri</div>
-        <input type="number" id="tireDiameter" class="scada-input" value="20" min="1">
-        <div class="scada-label">DS - Sekonder Dişlileri</div>
-        <input type="number" id="drivenPulleyDiameter" class="scada-input" value="16" min="1">
-      </div>
-
-      <div class="scada-row">
         <div class="scada-label">D - Tekerlek Çapı</div>
         <input type="number" id="wheelDiameter" class="scada-input" value="0" min="0" step="0.1">
         <div class="scada-label">k Değeri (plaka delik sayısı)</div>
@@ -72,6 +58,20 @@
         <input type="number" id="calculatedN2" class="scada-input result" value="0" readonly>
       </div>
 
+      <!-- Remove the following rows and their contents: -->
+      <!--
+      <div class="scada-row">
+        <div class="scada-label">A - z1</div>
+        <input type="number" id="wheelGearTeeth" class="scada-input" value="20" min="1">
+        <div class="scada-label">B - z2</div>
+        <input type="number" id="nortonGearTeeth" class="scada-input" value="17" min="1">
+      </div>
+      <div class="scada-row">
+        <div class="scada-label">C - Tahrik Dişlileri</div>
+        <input type="number" id="tireDiameter" class="scada-input" value="20" min="1">
+        <div class="scada-label">DS - Sekonder Dişlileri</div>
+        <input type="number" id="drivenPulleyDiameter" class="scada-input" value="16" min="1">
+      </div>
       <div class="scada-row">
         <div class="scada-label">Dişli Oranı Seçimi</div>
         <select id="gearRatioSelect" class="scada-select">
@@ -92,7 +92,6 @@
           <option value="16-23">16-23</option>
         </select>
       </div>
-
       <div class="scada-results">
         <div class="scada-row">
           <div class="scada-label">Tekerlek Oranı (A/B)</div>
@@ -100,16 +99,49 @@
           <div class="scada-label">Dişli Oranı (DS/C)</div>
           <input type="text" id="gearRatio" class="scada-input result" value="1.00" readonly>
         </div>
+      </div>
+      -->
+      <div class="scada-row">
+        <div class="scada-label">i</div>
+        <input type="text" id="transmissionRatio" class="scada-input result" value="1.00" readonly>
+      </div>
+      <div class="scada-row">
+        <div class="scada-label">Z Değeri</div>
+        <input type="text" id="zValue" class="scada-input result" value="0.00" readonly>
+      </div>
+      <!-- Formül Zinciri Hesaplama Başlangıç -->
+      <div class="scada-formula-chain">
+        <h3>Formül Zinciri Hesaplama</h3>
         <div class="scada-row">
-          <div class="scada-label">i</div>
-          <input type="text" id="transmissionRatio" class="scada-input result" value="1.00" readonly>
+          <div class="scada-label">n₁ (plaka)</div>
+          <input type="number" id="chain_n1" class="scada-input" value="0" min="0" step="0.01">
+          <div class="scada-label">z₁</div>
+          <input type="number" id="chain_z1" class="scada-input" value="0" min="0" step="0.01">
+          <div class="scada-label">z₂</div>
+          <input type="number" id="chain_z2" class="scada-input" value="0" min="0" step="0.01">
         </div>
         <div class="scada-row">
-          <div class="scada-label">Z Değeri</div>
-          <input type="text" id="zValue" class="scada-input result" value="0.00" readonly>
+          <div class="scada-label">z₃</div>
+          <input type="number" id="chain_z3" class="scada-input" value="0" min="0" step="0.01">
+          <div class="scada-label">z₄</div>
+          <input type="number" id="chain_z4" class="scada-input" value="0" min="0" step="0.01">
+        </div>
+        <div class="scada-row">
+          <div class="scada-label">z₆</div>
+          <input type="number" id="chain_z6" class="scada-input" value="0" min="0" step="0.01">
+          <div class="scada-label">z₇</div>
+          <input type="number" id="chain_z7" class="scada-input" value="0" min="0" step="0.01">
+        </div>
+        <div class="scada-row">
+          <div class="scada-label">n₂</div>
+          <input type="text" id="chain_n2" class="scada-input result" value="0" readonly>
+          <div class="scada-label">n₄</div>
+          <input type="text" id="chain_n4" class="scada-input result" value="0" readonly>
+          <div class="scada-label">n₇</div>
+          <input type="text" id="chain_n7" class="scada-input result" value="0" readonly>
         </div>
       </div>
-
+      <!-- Formül Zinciri Hesaplama Bitiş -->
       <div class="scada-row">
         <button id="recordBtn" class="scada-btn record">BAŞLAT</button>
         <button id="resetBtn" class="scada-btn reset">DURDUR</button>

@@ -4,16 +4,9 @@ function fmt(num) {
 }
 
 // Get DOM elements
-const wheelGearTeeth = document.getElementById('wheelGearTeeth');
-const nortonGearTeeth = document.getElementById('nortonGearTeeth');
-const tireDiameter = document.getElementById('tireDiameter');
-const drivenPulleyDiameter = document.getElementById('drivenPulleyDiameter');
 const wheelDiameter = document.getElementById('wheelDiameter');
 const kValue = document.getElementById('kValue');
 const plateNumber = document.getElementById('plateNumber');
-const gearRatioSelect = document.getElementById('gearRatioSelect');
-const wheelRatio = document.getElementById('wheelRatio');
-const gearRatio = document.getElementById('gearRatio');
 const transmissionRatio = document.getElementById('transmissionRatio');
 const zValue = document.getElementById('zValue');
 const recordBtn = document.getElementById('recordBtn');
@@ -22,6 +15,18 @@ const recordList = document.getElementById('recordList');
 const datetime = document.getElementById('datetime');
 const speedValue = document.getElementById('speedValue');
 const calculatedN2 = document.getElementById('calculatedN2');
+
+// --- Formül Zinciri Hesaplama ---
+const chain_n1 = document.getElementById('chain_n1');
+const chain_z1 = document.getElementById('chain_z1');
+const chain_z2 = document.getElementById('chain_z2');
+const chain_z3 = document.getElementById('chain_z3');
+const chain_z4 = document.getElementById('chain_z4');
+const chain_z6 = document.getElementById('chain_z6');
+const chain_z7 = document.getElementById('chain_z7');
+const chain_n2 = document.getElementById('chain_n2');
+const chain_n4 = document.getElementById('chain_n4');
+const chain_n7 = document.getElementById('chain_n7');
 
 // Predefined gear ratios
 const gearRatios = {
@@ -47,20 +52,6 @@ function updateDateTime() {
   const dateStr = now.toLocaleDateString('tr-TR');
   const timeStr = now.toLocaleTimeString('tr-TR');
   datetime.textContent = `${dateStr} ${timeStr}`;
-}
-
-// Calculate wheel ratio (A/B)
-function calculateWheelRatio() {
-  const a = parseFloat(wheelGearTeeth.value) || 0;
-  const b = parseFloat(nortonGearTeeth.value) || 0;
-  return b > 0 ? a / b : 0;
-}
-
-// Calculate gear ratio (D/C)
-function calculateGearRatio() {
-  const d = parseFloat(drivenPulleyDiameter.value) || 0;
-  const c = parseFloat(tireDiameter.value) || 0;
-  return c > 0 ? d / c : 0;
 }
 
 // Calculate i value: n1(plaka) / n2(teker)
@@ -110,44 +101,21 @@ function calculateN2FromSpeed() {
 
 // Update all calculations and display
 function updateCalculations() {
-  const wheelRatioValue = calculateWheelRatio();
-  const gearRatioValue = calculateGearRatio();
   const transmissionRatioValue = calculateTransmissionRatio();
   const zValueValue = calculateZValue();
   const calculatedN2Value = calculateN2FromSpeed();
 
-  wheelRatio.value = fmt(wheelRatioValue);
-  gearRatio.value = fmt(gearRatioValue);
   transmissionRatio.value = fmt(transmissionRatioValue);
   zValue.value = fmt(zValueValue);
   calculatedN2.value = fmt(calculatedN2Value);
 }
 
-// Handle gear ratio selection
-function handleGearRatioSelection() {
-  const selectedValue = gearRatioSelect.value;
-  if (selectedValue && selectedValue !== "") {
-    // Parse the selected ratio (e.g., "23-17")
-    const [a, b] = selectedValue.split('-').map(Number);
-    if (!isNaN(a) && !isNaN(b) && b > 0) {
-      wheelGearTeeth.value = a;
-      nortonGearTeeth.value = b;
-    }
-  }
-  updateCalculations();
-}
-
 // Reset form to default values
 function resetForm() {
-  wheelGearTeeth.value = 20;
-  nortonGearTeeth.value = 17;
-  tireDiameter.value = 20;
-  drivenPulleyDiameter.value = 16;
   wheelDiameter.value = 0;
   kValue.value = 0;
   plateNumber.value = 0;
   speedValue.value = 0;
-  gearRatioSelect.value = '';
   updateCalculations();
 }
 
@@ -155,17 +123,11 @@ function resetForm() {
 function recordEntry() {
   const entry = {
     datetime: new Date().toLocaleString('tr-TR'),
-    wheelGearTeeth: wheelGearTeeth.value || '0',
-    nortonGearTeeth: nortonGearTeeth.value || '0',
-    tireDiameter: tireDiameter.value || '0',
-    drivenPulleyDiameter: drivenPulleyDiameter.value || '0',
     wheelDiameter: wheelDiameter.value || '0',
     kValue: kValue.value || '0',
     plateNumber: plateNumber.value || '0',
     speedValue: speedValue.value || '0',
     calculatedN2: calculatedN2.value || '0.00',
-    wheelRatio: wheelRatio.value || '0.00',
-    gearRatio: gearRatio.value || '0.00',
     transmissionRatio: transmissionRatio.value || '0.00',
     zValue: zValue.value || '0.00'
   };
@@ -173,10 +135,8 @@ function recordEntry() {
   const div = document.createElement('div');
   div.innerHTML = `
     <strong>${entry.datetime}</strong><br>
-    A: ${entry.wheelGearTeeth}, B: ${entry.nortonGearTeeth}, C: ${entry.tireDiameter}, D: ${entry.drivenPulleyDiameter}<br>
     Tekerlek Çapı: ${entry.wheelDiameter}, k: ${entry.kValue}, nplaka: ${entry.plateNumber}<br>
     Hız: ${entry.speedValue} m/s, Hesaplanan n2: ${entry.calculatedN2}<br>
-    Tekerlek Oranı: ${entry.wheelRatio}, Dişli Oranı: ${entry.gearRatio}<br>
     <strong>i: ${entry.transmissionRatio}</strong><br>
     <strong>Z Değeri: ${entry.zValue}</strong>
   `;
@@ -200,33 +160,35 @@ function validateInput(input) {
 
 // Validate all numeric inputs
 function validateAllInputs() {
-  validateInput(wheelGearTeeth);
-  validateInput(nortonGearTeeth);
-  validateInput(tireDiameter);
-  validateInput(drivenPulleyDiameter);
   validateInput(wheelDiameter);
   validateInput(kValue);
   validateInput(plateNumber);
   validateInput(speedValue);
 }
 
+// Update formula chain calculations
+function updateFormulaChain() {
+  const n1 = parseFloat(chain_n1.value) || 0;
+  const z1 = parseFloat(chain_z1.value) || 0;
+  const z2 = parseFloat(chain_z2.value) || 0;
+  const z3 = parseFloat(chain_z3.value) || 0;
+  const z4 = parseFloat(chain_z4.value) || 0;
+  const z6 = parseFloat(chain_z6.value) || 0;
+  const z7 = parseFloat(chain_z7.value) || 0;
+
+  // n2 = (n1 * z1) / z2
+  let n2 = (z2 !== 0) ? (n1 * z1) / z2 : 0;
+  // n4 = (n2 * z3) / z4
+  let n4 = (z4 !== 0) ? (n2 * z3) / z4 : 0;
+  // n7 = (n4 * z6) / z7
+  let n7 = (z7 !== 0) ? (n4 * z6) / z7 : 0;
+
+  chain_n2.value = fmt(n2);
+  chain_n4.value = fmt(n4);
+  chain_n7.value = fmt(n7);
+}
+
 // Event listeners
-wheelGearTeeth.addEventListener('input', () => {
-  validateInput(wheelGearTeeth);
-  updateCalculations();
-});
-nortonGearTeeth.addEventListener('input', () => {
-  validateInput(nortonGearTeeth);
-  updateCalculations();
-});
-tireDiameter.addEventListener('input', () => {
-  validateInput(tireDiameter);
-  updateCalculations();
-});
-drivenPulleyDiameter.addEventListener('input', () => {
-  validateInput(drivenPulleyDiameter);
-  updateCalculations();
-});
 wheelDiameter.addEventListener('input', () => {
   validateInput(wheelDiameter);
   updateCalculations();
@@ -243,9 +205,13 @@ speedValue.addEventListener('input', () => {
   validateInput(speedValue);
   updateCalculations();
 });
-gearRatioSelect.addEventListener('change', handleGearRatioSelection);
 recordBtn.addEventListener('click', recordEntry);
 resetBtn.addEventListener('click', resetForm);
+
+// Event listeners for formula chain inputs
+[chain_n1, chain_z1, chain_z2, chain_z3, chain_z4, chain_z6, chain_z7].forEach(input => {
+  input.addEventListener('input', updateFormulaChain);
+});
 
 // Initialize
 updateDateTime();
