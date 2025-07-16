@@ -111,6 +111,7 @@ function updateCalculations() {
   nteker.value = fmt(calculatedNtekerValue);
   // Zincir kısmındaki nteker inputunu da otomatik doldur
   chain_nteker.value = fmt(calculatedNtekerValue);
+  updateFormulaChain();
 }
 
 // Reset form to default values
@@ -189,6 +190,10 @@ function updateFormulaChain() {
   chain_n2.value = fmt(n2);
   chain_n4.value = fmt(n4);
   chain_n7.value = fmt(n7);
+
+  // n7 değerini yukarıdaki n1 (plaka) alanına aktar
+  plateNumber.value = fmt(n7);
+  updateCalculations(); // zincirden gelen n1 değişince hesaplamalar güncellensin
 }
 
 // Event listeners
@@ -212,7 +217,7 @@ recordBtn.addEventListener('click', recordEntry);
 resetBtn.addEventListener('click', resetForm);
 
 // Event listeners for formula chain inputs
-[chain_n1, chain_z1, chain_z2, chain_z3, chain_z4, chain_z6, chain_z7].forEach(input => {
+[chain_z1, chain_z2, chain_z3, chain_z4, chain_z6, chain_z7].forEach(input => {
   input.addEventListener('input', updateFormulaChain);
 });
 
